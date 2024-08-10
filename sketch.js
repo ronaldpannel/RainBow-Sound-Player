@@ -62,12 +62,9 @@ function draw() {
   noFill();
   playBtn.addEventListener("click", () => {
     if (getAudioContext().state !== "running") {
-      getAudioContext().state === "resume";
+      getAudioContext().resume();
     }
   });
-  if (getAudioContext().state !== "running") {
-    getAudioContext().state === "resume";
-  }
 
   for (let i = 0; i < rainbows.length; i++) {
     rainbows[i].update();
