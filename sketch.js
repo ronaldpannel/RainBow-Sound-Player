@@ -50,11 +50,12 @@ function setup() {
     let radius = 200;
     let spacing = i * 20;
     let angle = 180;
-    let va = 180 * radius * i * 0.000003;
+    let va = ((180 / radius) * (i + 1)) / 8;
     let h = 200 + (100 / num) * i;
-    let note = 76;
+    let note = midiNotes[i];
 
     rainbows[i] = new Rainbow(radius + spacing, angle, va, h, note);
+    console.log(note);
   }
 }
 function draw() {

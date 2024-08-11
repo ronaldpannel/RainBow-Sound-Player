@@ -9,37 +9,33 @@ class Rainbow {
     this.s = 100;
     this.b = 100;
     this.note = note;
-
     this.env = new p5.Envelope();
     let attackVol = 1;
     let releaseVol = 0;
     let sustainVol = 1;
 
-    let attackTime = 0.1;
+    let attackTime = 0.01;
     let releaseTime = 0.1;
-    let sustainTime = 0.1;
-
+    let sustainTime = 0.01;
     this.env.setADSR(attackTime, sustainTime, sustainVol, releaseTime);
     this.env.setRange(attackVol, releaseVol);
 
-    this.osc = new p5.Oscillator();
-    this.osc.freq(midiToFreq(this.note));
-    this.osc.amp(this.env);
-    this.synth = new p5.MonoSynth();
+    this.ocs = new p5.Oscillator();
+    this.ocs.start();
+    this.ocs.freq(midiToFreq(this.note));
+    this.ocs.amp(this.env);
   }
   update() {
-    this.env.play();
-    
-    if (this.angle > 180) {
+
+    if (this.angle == 180) {
       this.av *= -1;
       this.s = 0;
-      this.synth.play("A$", 1, 0, 0.2);
+      //  this.synth.play("A$", .2, 0, 0.2);
       this.env.play();
-      console.log(getAudioContext().state);
-    } else if (this.angle < 0) {
+    } else if (this.angle <= 0) {
       this.av *= -1;
       this.s = 0;
-      this.synth.play("A$", 1, 0, 0.2);
+      // this.synth.play("A$", 1, 0, 0.2);
       this.env.play();
     } else this.s += 1;
     this.angle += this.av;
